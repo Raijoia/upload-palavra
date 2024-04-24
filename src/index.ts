@@ -13,20 +13,17 @@ app.post('/upload', upload.single('file'), (req: any, res: any) => {
   res.json({ message: 'Arquivo enviado com sucesso', file: req.file.filename });
 });
 
-app.post('/user'), async (req: any, res: any) => {
-  const { name, email, password } = req.body;
-  console.log(req.body)
-
+app.post('/user', async (req: any, res: any) => {
   const user = await prisma.user.create({
     data: {
-      name,
-      email,
-      password
-    }
+      name: "John Doe",
+      email: "xxxxx@xxxxxx",
+      password: "xxxxxx",
+    },
   });
 
   res.status(201).json(user);
-}
+});
 
 app.listen(port, async () => {
   await prisma.$connect();
