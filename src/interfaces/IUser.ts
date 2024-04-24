@@ -1,12 +1,12 @@
 export interface IUser {
-  _id: string | null
-  email: string | null
-  name: string | null
-  password: string | null
+  _id: string
+  email: string
+  name: string
+  password: string
 }
 
 export interface DtoUser {
-  email: string | null
-  name: string | null
-  password: string | null
+  email: string
+  name: string
+  password: string
 }

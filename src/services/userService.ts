@@ -1,11 +1,9 @@
-const { DtoUser } = require('../interfaces/IUser');
+import type { DtoUser } from '../interfaces/IUser';
 import { prisma } from '../controllers/prismaController';
 
 class UserService {
-  async createUser(dto: typeof DtoUser) {
+  async createUser(dto: DtoUser) {
     try {
-      console.log('dto', dto.email)
-
       const userExists = await prisma.user.findUnique({
         where: {
           email: dto.email,
