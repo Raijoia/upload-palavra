@@ -36,6 +36,18 @@ class UserController {
       res.status(400).json({ message: error.message });
     }
   }
+
+  static async updateUser(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const { name, email, password }: DtoUser = req.body;
+      const updatedUser = await userServices.updateUser({ id, name, email, password });
+
+      res.status(200).json(updatedUser);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
 }
 
 module.exports = UserController;

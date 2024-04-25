@@ -7,5 +7,6 @@ router
   .post('/user', UserController.createUser)
   .get('/user', UserController.getAllUsers)
   .get('/user/:id', UserController.getUserById)
+  .put('/user/:id', UserController.updateUser)
 
 module.exports = router;

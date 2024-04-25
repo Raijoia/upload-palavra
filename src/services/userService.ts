@@ -1,4 +1,4 @@
-import type { DtoUser } from '../interfaces/IUser';
+import type { DtoUser, IUser } from '../interfaces/IUser';
 import { prisma } from '../controllers/prismaController';
 
 class UserService {
@@ -62,6 +62,37 @@ class UserService {
       return user;
     } catch (error: any) {
       throw new Error(`An error occurred while fetching the user: ${error}`);
+    }
+  }
+
+  async updateUser(dto: IUser) {
+    try {
+      const { id, name, email, password } = dto;
+
+      const user = await prisma.user.findUnique({
+        where: {
+          id,
+        },
+      });
+
+      if (!user) {
+        throw new Error('User not found');
+      }
+
+      const updatedUser = await prisma.user.update({
+        where: {
+          id,
+        },
+        data: {
+          name,
+          email,
+          password,
+        },
+      });
+
+      return updatedUser;
+    } catch (error: any) {
+      throw new Error(`An error occurred while updating the user: ${error}`);
     }
   }
 }
