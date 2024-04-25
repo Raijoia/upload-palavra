@@ -95,6 +95,28 @@ class UserService {
       throw new Error(`An error occurred while updating the user: ${error}`);
     }
   }
+
+  async deleteUser(id: string) {
+    try {
+      const user = await prisma.user.findUnique({
+        where: {
+          id,
+        },
+      });
+
+      if (!user) {
+        throw new Error('User not found');
+      }
+
+      await prisma.user.delete({
+        where: {
+          id,
+        },
+      });
+    } catch (error: any) {
+      throw new Error(`An error occurred while deleting the user: ${error}`);
+    }
+  }
 }
 
 module.exports = UserService;
