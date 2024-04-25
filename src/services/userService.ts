@@ -1,5 +1,8 @@
+require('dotenv').config();
 import type { DtoUser, IUser } from '../interfaces/IUser';
 import { prisma } from '../controllers/prismaController';
+
+const { hash } = require('bcryptjs');
 
 class UserService {
   async createUser(dto: DtoUser) {
@@ -14,11 +17,18 @@ class UserService {
         throw new Error('Already registered user');
       }
 
+      const passwordHash = await hash(dto.password, Number(process.env.SALT_ROUNDS));
+
       const user = await prisma.user.create({
         data: {
           name: dto.name,
           email: dto.email,
-          password: dto.password,
+          password: passwordHash,
+        },
+        select: {
+          id: true,
+          name: true,
+          email: true,
         },
       });
 
@@ -79,6 +89,8 @@ class UserService {
         throw new Error('User not found');
       }
 
+      const passwordHash = await hash(password, Number(process.env.SALT_ROUNDS));
+
       const updatedUser = await prisma.user.update({
         where: {
           id,
@@ -86,7 +98,12 @@ class UserService {
         data: {
           name,
           email,
-          password,
+          password: passwordHash,
+        },
+        select: {
+          id: true,
+          name: true,
+          email: true,
         },
       });
 

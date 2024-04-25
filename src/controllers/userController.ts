@@ -60,7 +60,7 @@ class UserController {
 
       await userServices.deleteUser(id);
 
-      res.status(200).json({ message: `User with id ${id} has been deleted}` });
+      res.status(200).json({ message: `User with id ${id} has been deleted` });
     } catch (error: any) {
       res.status(400).json({ message: error.message });
     }
