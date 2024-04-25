@@ -15,6 +15,27 @@ class UserController {
       res.status(400).json({ message: error.message });
     }
   }
+
+  static async getAllUsers(req: Request, res: Response) {
+    try {
+      const users = await userServices.getAllUsers();
+
+      res.status(200).json(users);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
+
+  static async getUserById(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const user = await userServices.getUserById(id);
+
+      res.status(200).json(user);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
 }
 
 module.exports = UserController;

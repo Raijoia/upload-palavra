@@ -27,6 +27,43 @@ class UserService {
       throw new Error(`An error occurred while creating the user: ${error}`);
     }
   }
+
+  async getAllUsers() {
+    try {
+      return await prisma.user.findMany({
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      });
+    } catch (error: any) {
+      throw new Error(`An error occurred while fetching the users: ${error}`);
+    }
+  }
+
+  async getUserById(id: string) {
+    try {
+      const user = await prisma.user.findUnique({
+        where: {
+          id,
+        },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      });
+
+      if (!user) {
+        throw new Error('User not found');
+      }
+
+      return user;
+    } catch (error: any) {
+      throw new Error(`An error occurred while fetching the user: ${error}`);
+    }
+  }
 }
 
 module.exports = UserService;
