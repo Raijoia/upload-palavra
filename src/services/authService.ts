@@ -15,11 +15,12 @@ class AuthService {
         id: true,
         email: true,
         password: true,
+        active: true,
       }
     });
 
-    if (!user) {
-      throw new Error('User not found');
+    if (!user || !user.active) {
+      throw new Error('User not found or inactive');
     }
 
     const passwordMatch = await compare(dto.password, user.password);
