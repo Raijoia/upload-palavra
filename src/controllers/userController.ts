@@ -15,6 +15,16 @@ class UserController {
     }
   }
 
+  static async getAllUsersInactive(req: Request, res: Response) {
+    try {
+      const users = await userServices.getAllUsersInactive();
+
+      res.status(200).json(users);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
+
   static async getUserById(req: Request, res: Response) {
     try {
       const { id } = req.params;

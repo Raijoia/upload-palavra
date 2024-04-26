@@ -8,6 +8,7 @@ router.use(authenticate);
 
 router
   .get('/user', UserController.getAllUsers)
+  .get('/user/inactive', UserController.getAllUsersInactive)
   .get('/user/:id', UserController.getUserById)
   .put('/user/:id', UserController.updateUser)
   .delete('/user/:id', UserController.deleteUser);

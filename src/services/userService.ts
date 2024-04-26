@@ -22,6 +22,23 @@ class UserService {
     }
   }
 
+  async getAllUsersInactive() {
+    try {
+      return await prisma.user.findMany({
+        where: {
+          active: false,
+        },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      });
+    } catch (error: any) {
+      throw new Error(`An error occurred while fetching the users: ${error}`);
+    }
+  }
+
   async getUserById(id: string) {
     try {
       const user = await prisma.user.findUnique({
@@ -59,7 +76,10 @@ class UserService {
         throw new Error('User not found or is inactive');
       }
 
-      const passwordHash = await hash(password, Number(process.env.SALT_ROUNDS));
+      const passwordHash = await hash(
+        password,
+        Number(process.env.SALT_ROUNDS)
+      );
 
       const updatedUser = await prisma.user.update({
         where: {
