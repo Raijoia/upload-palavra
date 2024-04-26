@@ -52,8 +52,8 @@ class UserService {
         },
       });
 
-      if (!user) {
-        throw new Error('User not found');
+      if (!user || !user.active) {
+        throw new Error('User not found or is inactive');
       }
 
       const passwordHash = await hash(password, Number(process.env.SALT_ROUNDS));
@@ -66,6 +66,7 @@ class UserService {
           name,
           email,
           password: passwordHash,
+          updatedAt: new Date(),
         },
         select: {
           id: true,
