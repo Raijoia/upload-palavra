@@ -32,3 +32,11 @@ model Upload {
   createdAt DateTime @default(now())
   deletedAt DateTime?
 }
+
+model UserUpload {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String
+  uploadId  String
+  createdAt DateTime @default(now())
+  deletedAt DateTime?
+}
