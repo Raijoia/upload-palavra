@@ -27,7 +27,7 @@ model User {
 
 model Upload {
   id        String @id @default(auto()) @map("_id") @db.ObjectId
-  filename  String
+  filename  String @unique
   location  String
   createdAt DateTime @default(now())
   deletedAt DateTime?
