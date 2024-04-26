@@ -1,6 +1,7 @@
 require('dotenv').config();
 import type { DtoUser, IUser } from '../interfaces/IUser';
 import { prisma } from '../controllers/prismaController';
+import { create } from 'domain';
 
 const { hash } = require('bcryptjs');
 
@@ -34,6 +35,9 @@ class UserService {
           id: true,
           name: true,
           email: true,
+          createdAt: true,
+          updatedAt: true,
+          deletedAt: true,
         },
       });
     } catch (error: any) {
