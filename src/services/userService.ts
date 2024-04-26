@@ -55,6 +55,10 @@ class UserService {
           id: true,
           name: true,
           email: true,
+          active: true,
+          createdAt: true,
+          updatedAt: true,
+          deletedAt: true,
         },
       });
 
