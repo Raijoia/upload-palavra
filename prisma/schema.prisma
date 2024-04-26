@@ -20,7 +20,6 @@ model User {
   name     String
   password String
   active   Boolean  @default(true)
-  uploadsId String[]
   createdAt DateTime @default(now())
   deletedAt DateTime?
   updatedAt DateTime?
@@ -32,6 +31,4 @@ model Upload {
   location  String
   createdAt DateTime @default(now())
   deletedAt DateTime?
-  userId    String
-  user      User   @relation(fields: [userId], references: [id])
 }
