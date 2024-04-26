@@ -92,9 +92,13 @@ class UserService {
         throw new Error('User not found');
       }
 
-      await prisma.user.delete({
+      await prisma.user.update({
         where: {
           id,
+        },
+        data: {
+          active: false,
+          deletedAt: new Date(),
         },
       });
     } catch (error: any) {
