@@ -4,10 +4,15 @@ const FileService = require('../services/fileService');
 
 const fileService = new FileService();
 
+interface reqNew extends Request {
+  userId: number;
+}
+
+
 class FileController {
-  static async uploadFile(req: Request, res: Response) {
+  static async uploadFile(req: reqNew, res: Response) {
     try {
-      const fileUploaded = await fileService.uploadFile(req.file);
+      const fileUploaded = await fileService.uploadFile(req.file, req.userId);
 
       res.status(201).json({ message: 'Arquivo enviado com sucesso', file: fileUploaded });
     } catch (error) {

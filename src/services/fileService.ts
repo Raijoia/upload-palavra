@@ -1,7 +1,7 @@
 import { prisma } from "../controllers/prismaController";
 
 class FileService {
-  async uploadFile(file: any) {
+  async uploadFile(file: any, id: string) {
     const fileExists = await prisma.upload.findUnique({
       where: {
         filename: file.originalname,
@@ -19,7 +19,14 @@ class FileService {
       },
     });
 
-    return fileUploaded;
+    const userUploaded = await prisma.userUpload.create({
+      data: {
+        userId: id,
+        uploadId: fileUploaded.id,
+      },
+    })
+
+    return { fileUploaded, userUploaded };
   }
 }
 
