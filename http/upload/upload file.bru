@@ -7,7 +7,11 @@ meta {
 post {
   url: http://localhost:8080/upload
   body: multipartForm
-  auth: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmIyMTM4OGU3OTJiMmYxMWQ1OTA4MCIsImVtYWlsIjoibWVnYWMxNTRAYWFhIiwiaWF0IjoxNzE0MTAyNjA5LCJleHAiOjE3MTQxODkwMDl9.HG9w6tIoRGbPzi_xcRNJvbWK7gJBSyrt7xpRv7r5YHk
 }
 
 body:multipart-form {

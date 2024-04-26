@@ -12,7 +12,7 @@ class FileController {
       res.status(201).json({ message: 'Arquivo enviado com sucesso', file: fileUploaded });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Erro ao enviar arquivo' });
+      res.status(500).json({ message: `Erro ao enviar arquivo: ${error}` });
     }
   }
 }
