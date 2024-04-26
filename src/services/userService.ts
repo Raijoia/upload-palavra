@@ -8,6 +8,9 @@ class UserService {
   async getAllUsers() {
     try {
       return await prisma.user.findMany({
+        where: {
+          active: true,
+        },
         select: {
           id: true,
           name: true,
